@@ -10,7 +10,20 @@ $(document).ready(function(){
       }).fail(function(jqhxr, status, error){
         cb({jqhxr: jqhxr, statur: status, error: error});
         });
-      }
+      },
+
+    register: function(credentials, callback){
+      this.ajax({
+        method: 'POST',
+        url: this.api_url +'/users',
+        contentType:'application/json; charset=utf-8',
+        data: JSON.stringify(credentials),
+        dataType: 'json'
+      }, callback);
+
+
+
+    }
   };
 });
 
