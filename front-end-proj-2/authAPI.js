@@ -20,6 +20,16 @@ var authAPI = {
       data: JSON.stringify(credentials),
       dataType: 'json'
     }, callback);
+  },
+
+  login: function(credentials, callback){
+    this.ajax({
+      method: 'POST',
+      url: this.api_url +'/login',
+      contentType:'application/json; charset=utf-8',
+      data: JSON.stringify(credentials),
+      dataType: 'json'
+    }, callback);
   }
 };
 
@@ -54,6 +64,19 @@ $(document).ready(function(){
   $('#register').on('submit', function(e) {
     var credentials = wrap('credentials', form2object(this));
     authAPI.register(credentials, callback);
+    e.preventDefault();
+  });
+
+  $('#login').on('submit', function(e) {
+    var credentials = wrap('credentials', form2object(this));
+    var cb = function cb(error, data) {
+      if (error) {
+        callback(error);
+        return;
+      }
+      callback(null, data);
+    };
+    authAPI.login(credentials, cb);
     e.preventDefault();
   });
 
