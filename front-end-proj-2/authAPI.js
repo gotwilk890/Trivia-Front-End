@@ -5,7 +5,7 @@ var authAPI = {
   api_url: 'http://localhost:3000',
 
   ajax: function(config, cb){
-    $ajax(config).done(function(data, textStatus, jqhxr){
+    $.ajax(config).done(function(data, textStatus, jqhxr){
       cb(null, data);
     }).fail(function(jqhxr, status, error){
       cb({jqhxr: jqhxr, statur: status, error: error});
@@ -15,14 +15,11 @@ var authAPI = {
   register: function(credentials, callback){
     this.ajax({
       method: 'POST',
-      url: this.api_url +'/users',
+      url: this.api_url +'/register',
       contentType:'application/json; charset=utf-8',
       data: JSON.stringify(credentials),
       dataType: 'json'
     }, callback);
-
-
-
   }
 };
 
@@ -54,6 +51,11 @@ $(document).ready(function(){
     $('#result').val(JSON.stringify(data, null, 4));
   };
 
+  $('#register').on('submit', function(e) {
+    var credentials = wrap('credentials', form2object(this));
+    authAPI.register(credentials, callback);
+    e.preventDefault();
+  });
 
 
 });
