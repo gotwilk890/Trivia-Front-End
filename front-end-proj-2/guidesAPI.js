@@ -15,14 +15,34 @@ var guidesAPI = {
   showGuides: function(token, callback){
     this.ajax({
       method: 'GET',
-      url: this.api_url +'/guides/',
+      url: this.api_url +'/guides',
       headers: {
         Authorization: 'Token token=' + token
       },
       contentType:'application/json; charset=utf-8',
-      data: JSON.stringify(),
       dataType: 'json'
     }, callback);
   }
 
 };
+
+$(document).ready(function(){
+
+  $('#guides').on('submit', function(e){
+    var token = $('.token').val();
+    var cb = function cb(error, data) {
+      if (error) {
+        callback(error);
+        return;
+      }
+      callback(null, data);
+      };
+    guidesAPI.showGuides(token, cb);
+    e.preventDefault();
+  });
+
+
+
+
+
+});
