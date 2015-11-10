@@ -12,4 +12,17 @@ var guidesAPI = {
       });
     },
 
+  showGuides: function(token, callback){
+    this.ajax({
+      method: 'GET',
+      url: this.api_url +'/guides/',
+      headers: {
+        Authorization: 'Token token=' + token
+      },
+      contentType:'application/json; charset=utf-8',
+      data: JSON.stringify(),
+      dataType: 'json'
+    }, callback);
+  }
+
 };
