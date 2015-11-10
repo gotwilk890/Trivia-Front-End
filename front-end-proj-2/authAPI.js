@@ -75,6 +75,7 @@ $(document).ready(function(){
         return;
       }
       callback(null, data);
+      $('.token').val(data.user.token);
     };
     authAPI.login(credentials, cb);
     e.preventDefault();
