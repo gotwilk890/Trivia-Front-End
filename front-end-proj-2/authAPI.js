@@ -30,36 +30,49 @@ var authAPI = {
       data: JSON.stringify(credentials),
       dataType: 'json'
     }, callback);
+  },
+
+  logout: function(id, token, callback){
+    this.ajax({
+      method: 'DELETE',
+      url: this.api_url +'/logout/' + id,
+      headers: {
+        Authorization: 'Token token=' + token
+      },
+      contentType:'application/json; charset=utf-8',
+      data: JSON.stringify(),
+      dataType: 'json'
+    }, callback);
   }
 };
 
-$(document).ready(function(){
-
-  var form2object = function(form) {
-    var data = {};
-    $(form).children().each(function(index, element) {
-      var type = $(this).attr('type');
-      if ($(this).attr('name') && type !== 'submit' && type !== 'hidden') {
-        data[$(this).attr('name')] = $(this).val();
-      }
-    });
-    return data;
-  };
-
-  var wrap = function wrap(root, formData) {
-    var wrapper = {};
-    wrapper[root] = formData;
-    return wrapper;
-  };
-
-  var callback = function callback(error, data) {
-    if (error) {
-      console.error(error);
-      $('#result').val('status: ' + error.status + ', error: ' +error.error);
-      return;
+var form2object = function(form) {
+  var data = {};
+  $(form).children().each(function(index, element) {
+    var type = $(this).attr('type');
+    if ($(this).attr('name') && type !== 'submit' && type !== 'hidden') {
+      data[$(this).attr('name')] = $(this).val();
     }
-    $('#result').val(JSON.stringify(data, null, 4));
-  };
+  });
+  return data;
+};
+
+var wrap = function wrap(root, formData) {
+  var wrapper = {};
+  wrapper[root] = formData;
+  return wrapper;
+};
+
+var callback = function callback(error, data) {
+  if (error) {
+    console.error(error);
+    $('#result').val('status: ' + error.status + ', error: ' +error.error);
+    return;
+  }
+  $('#result').val(JSON.stringify(data, null, 4));
+};
+
+$(document).ready(function(){
 
   $('#register').on('submit', function(e) {
     var credentials = wrap('credentials', form2object(this));
@@ -76,10 +89,23 @@ $(document).ready(function(){
       }
       callback(null, data);
       $('.token').val(data.user.token);
+      $('.id').val(data.user.id);
     };
     authAPI.login(credentials, cb);
     e.preventDefault();
   });
 
-
+  $('#logout').on('submit', function(e){
+    var id = $('.id').val();
+    var token = $('.token').val();
+    var cb = function cb(error, data) {
+      if (error) {
+        callback(error);
+        return;
+      }
+    callback(null, data);
+    };
+    authAPI.logout(id, token, cb);
+    e.preventDefault();
+  });
 });
