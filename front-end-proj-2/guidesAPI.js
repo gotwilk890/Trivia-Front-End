@@ -35,6 +35,19 @@ var guidesAPI = {
       data: JSON.stringify(guide),
       dataType: 'json'
     }, callback);
+  },
+
+  edit: function(guide, id, token, callback){
+    this.ajax({
+      method: 'PATCH',
+      url: this.api_url +'/guides/' + id,
+      headers: {
+      Authorization: 'Token token=' + token
+      },
+      contentType:'application/json; charset=utf-8',
+      data: JSON.stringify(guide),
+      dataType: 'json'
+    }, callback);
   }
 
 };
@@ -68,6 +81,20 @@ $(document).ready(function(){
     e.preventDefault();
   });
 
+  $('#updateGuide').on('submit', function(e){
+    var id = $('#guideID').val();
+    var token = $('.token').val();
+    var guide = wrap('guide', form2object(this));
+    var cb = function cb(error, data) {
+      if (error) {
+        callback(error);
+        return;
+      }
+    callback(null, data);
+    };
+    guidesAPI.edit(guide, id, token, cb);
+    e.preventDefault();
+  });
 
 
 
