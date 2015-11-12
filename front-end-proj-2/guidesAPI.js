@@ -48,6 +48,19 @@ var guidesAPI = {
       data: JSON.stringify(guide),
       dataType: 'json'
     }, callback);
+  },
+
+  delete: function(id, token, callback){
+    this.ajax({
+      method: 'DELETE',
+      url: this.api_url +'/guides/' + id,
+      headers: {
+      Authorization: 'Token token=' + token
+      },
+      contentType:'application/json; charset=utf-8',
+      data: JSON.stringify(),
+      dataType: 'json'
+    }, callback);
   }
 
 };
@@ -96,6 +109,12 @@ $(document).ready(function(){
     e.preventDefault();
   });
 
+  $('#delete').on('submit', function(e){
+    var id = $('#guideID').val();
+    var token = $('.token').val();
+    guidesAPI.delete(id, token, callback);
+    e.preventDefault();
+  });
 
 
 
