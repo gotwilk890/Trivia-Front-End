@@ -124,74 +124,8 @@
 <div class="container-fluid features" id="section2">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-12" id="showguides">
 				<h2 class="text-center features-text">Guides</h2>
-				<div class="col-md-6 col-sm-12 col-xs-12 icon-box">
-					<div class="col-md-2 col-sm-2 col-xs-12">
-						<div class="iconing">
-							<i class="glyphicon glyphicon-pencil"></i>
-						</div>
-					</div>
-					<div class="col-md-9 col-md-offset-1 col-sm-10 col-xs-12 icon-text-box">
-                    	<h4>Modern Design</h4>
-                    	<p>Lorem ipsum dolor sit amet, consectetur elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-12 col-xs-12 icon-box">
-					<div class="col-md-2 col-sm-2 col-xs-12">
-						<div class="iconing">
-							<i class="glyphicon glyphicon-pencil"></i>
-						</div>
-					</div>
-					<div class="col-md-9 col-md-offset-1 col-sm-10 col-xs-12 icon-text-box">
-                    	<h4>Easy To Customize</h4>
-                    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-12 col-xs-12 icon-box">
-					<div class="col-md-2 col-sm-2 col-xs-12">
-						<div class="iconing">
-							<i class="glyphicon glyphicon-pencil"></i>
-						</div>
-					</div>
-					<div class="col-md-9 col-md-offset-1 col-sm-10 col-xs-12 icon-text-box">
-                    	<h4>Save Time</h4>
-                    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, adipiscing elit.</p>
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-12 col-xs-12 icon-box">
-					<div class="col-md-2 col-sm-2 col-xs-12">
-						<div class="iconing">
-							<i class="glyphicon glyphicon-pencil"></i>
-						</div>
-					</div>
-					<div class="col-md-9 col-md-offset-1 col-sm-10 col-xs-12 icon-text-box">
-                    	<h4>Professional Work</h4>
-                    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit consectetur adipiscing elit.</p>
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-12 col-xs-12 icon-box">
-					<div class="col-md-2 col-sm-2 col-xs-12">
-						<div class="iconing">
-							<i class="glyphicon glyphicon-pencil"></i>
-						</div>
-					</div>
-					<div class="col-md-9 col-md-offset-1 col-sm-10 col-xs-12 icon-text-box">
-                    	<h4>User-friendly Interface</h4>
-                    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit consectetur adipiscing elit.</p>
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-12 col-xs-12 icon-box">
-					<div class="col-md-2 col-sm-2 col-xs-12">
-						<div class="iconing">
-							<i class="glyphicon glyphicon-pencil"></i>
-						</div>
-					</div>
-					<div class="col-md-9 col-md-offset-1 col-sm-10 col-xs-12 icon-text-box">
-                    	<h4>Made With Love</h4>
-                    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -374,6 +308,23 @@
 	</div>
 </div>
 
+  <!-- Handlebar template   -->
+    <script id="guide-show" type="text/x-handlebars-template">
+      {{#each guides}}
+      <div class="col-md-6 col-sm-12 col-xs-12 icon-box">
+        <div class="col-md-2 col-sm-2 col-xs-12">
+          <div class="iconing">
+            <i class="glyphicon glyphicon-pencil"></i>
+          </div>
+        </div>
+        <div class="col-md-9 col-md-offset-1 col-sm-10 col-xs-12 icon-text-box">
+          <h4>{{name}}</h4>
+        </div>
+      </div>
+      {{/each}}
+    </script>
+
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -382,8 +333,11 @@
     <script type="text/javascript" src="js/jquery.waypoints.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script src="js/lightbox.min.js"></script>
-    <script type="text/javascript" src="authAPI.js" defer charset="utf-8"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/handlebarsjs/4.0.4/handlebars.js"></script>
     <script type="text/javascript" src="guidesAPI.js" defer charset="utf-8"></script>
+    <script type="text/javascript" src="authAPI.js" defer charset="utf-8"></script>
+
+
     <script>
       function initialize() {
         var mapCanvas = document.getElementById('map-canvas');
@@ -458,3 +412,5 @@
   	</script>
 </body>
 </html>
+
+

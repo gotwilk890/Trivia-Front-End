@@ -1,4 +1,6 @@
 "use strict"
+var guideTemplate = Handlebars.compile($('#guide-show').html());
+var data = {};
 
 var authAPI = {
 
@@ -125,6 +127,17 @@ $(document).ready(function(){
       $('#tryagain').html('Logged in!');
       $('#reg').hide();
       $('#logout').show();
+      var token = $('.token').val();
+      guidesAPI.showGuides(token, function(error, data){
+        data.guides = data.guides;
+        var display = function(){
+        var myHTML = guideTemplate({guides: data.guides});
+        $("#showguides").html(myHTML);
+      };
+      display();
+
+      });
+      e.preventDefault();
     };
     authAPI.login(credentials, cb);
     e.preventDefault();
