@@ -48,7 +48,7 @@ var authAPI = {
 
 var form2object = function(form) {
   var data = {};
-  $(form).children().each(function(index, element) {
+  $(form).find("input").each(function(index, element) {
     var type = $(this).attr('type');
     if ($(this).attr('name') && type !== 'submit' && type !== 'hidden') {
       data[$(this).attr('name')] = $(this).val();
@@ -74,9 +74,37 @@ var callback = function callback(error, data) {
 
 $(document).ready(function(){
 
+  $('#reg').on('click', function(){
+    $('#register').show();
+    $('#login').hide();
+    $('#reg').hide();
+    $('#log').show();
+    $('#tryagain').html('');
+  });
+
+  $('#log').on('click', function(){
+    $('#register').hide();
+    $('#login').show();
+    $('#reg').show();
+    $('#log').hide();
+    $('#tryagain').html('');
+  });
+
   $('#register').on('submit', function(e) {
     var credentials = wrap('credentials', form2object(this));
-    authAPI.register(credentials, callback);
+    var cb = function cb(error, data) {
+      if (error) {
+        callback(error);
+        $('#tryagain').html('Try Something Else');
+        return;
+      }
+    callback(null, data);
+    $('#register').hide();
+    $('#login').show();
+    $('#tryagain').html('Now Try Loggin In');
+
+    };
+    authAPI.register(credentials, cb);
     e.preventDefault();
   });
 
@@ -85,11 +113,15 @@ $(document).ready(function(){
     var cb = function cb(error, data) {
       if (error) {
         callback(error);
+        $('#tryagain').html('Try Again!');
         return;
       }
       callback(null, data);
       $('.token').val(data.user.token);
       $('.id').val(data.user.id);
+      $('#login').hide();
+      $('#tryagain').html('Logged in!');
+      $('#reg').hide();
     };
     authAPI.login(credentials, cb);
     e.preventDefault();

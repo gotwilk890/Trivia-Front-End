@@ -157,8 +157,27 @@
 	background: rgba(255, 255, 255, 0.3);
 }
 
+#log{
+  display: none;
+}
+
+#register{
+  display: none;
+}
+#register{
+  color: black;
+}
+
 #login{
   color: black;
+}
+
+#login p {
+  margin-top: 5px;
+}
+.error
+{
+  color: white;
 }
 .some-notes
 {
