@@ -155,7 +155,7 @@ $(document).ready(function(){
     $('#login').show();
     $('#tryagain').html('');
     $('#logout').hide();
-    $(".editguides").html('');
+    $(".editguides").remove();
 
 
     };

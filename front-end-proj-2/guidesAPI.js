@@ -1,5 +1,5 @@
 "use strict"
-
+var toggle = 'off';
 var guidesAPI = {
 
   api_url: 'http://localhost:3000',
@@ -80,6 +80,18 @@ $(document).ready(function(){
     e.preventDefault();
   });
 
+  $('.createbut').on('click', function(){
+    if(toggle === 'on' ){
+      $('#createGuide').hide();
+      toggle = 'off';
+    }
+    else if($('.token').val()){
+      $('#createGuide').show();
+      toggle = 'on';
+      }
+  });
+
+
   $('#createGuide').on('submit', function(e){
     var token = $('.token').val();
     var guide = wrap('guide', form2object(this));
@@ -89,6 +101,20 @@ $(document).ready(function(){
         return;
       }
     callback(null, data);
+
+    $('#createGuide').hide();
+    $(".editguides").remove();
+    toggle = 'off';
+    guidesAPI.showGuides(token, function(error, data){
+        data.guides = data.guides;
+        var display = function(){
+        var myHTML = guideTemplate({guides: data.guides});
+        $("#showguides").append(myHTML);
+        };
+    display();
+
+      });
+      e.preventDefault();
     };
     guidesAPI.create(guide, token, cb);
     e.preventDefault();
