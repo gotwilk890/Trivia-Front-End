@@ -132,7 +132,7 @@ $(document).ready(function(){
         data.guides = data.guides;
         var display = function(){
         var myHTML = guideTemplate({guides: data.guides});
-        $("#showguides").html(myHTML);
+        $("#showguides").append(myHTML);
       };
       display();
 
@@ -155,6 +155,7 @@ $(document).ready(function(){
     $('#login').show();
     $('#tryagain').html('');
     $('#logout').hide();
+    $(".editguides").html('');
 
 
     };
