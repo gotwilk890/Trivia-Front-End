@@ -102,6 +102,8 @@ $(document).ready(function(){
     $('#register').hide();
     $('#login').show();
     $('#tryagain').html('Now Try Loggin In');
+    $('#log').hide();
+
 
     };
     authAPI.register(credentials, cb);
@@ -122,12 +124,13 @@ $(document).ready(function(){
       $('#login').hide();
       $('#tryagain').html('Logged in!');
       $('#reg').hide();
+      $('#logout').show();
     };
     authAPI.login(credentials, cb);
     e.preventDefault();
   });
 
-  $('#logout').on('submit', function(e){
+  $('#logout').on('click', function(e){
     var id = $('.id').val();
     var token = $('.token').val();
     var cb = function cb(error, data) {
@@ -136,6 +139,11 @@ $(document).ready(function(){
         return;
       }
     callback(null, data);
+    $('#login').show();
+    $('#tryagain').html('');
+    $('#logout').hide();
+
+
     };
     authAPI.logout(id, token, cb);
     e.preventDefault();
