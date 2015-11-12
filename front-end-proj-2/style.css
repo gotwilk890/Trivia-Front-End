@@ -1,7 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
 
-
 .header
 {
 	background: #212A3F;
@@ -158,6 +157,10 @@
 }
 
 #log{
+  display: none;
+}
+
+#logout{
   display: none;
 }
 
@@ -575,4 +578,8 @@ input[placeholder], [placeholder], *[placeholder] {
     margin-top: 15px;
     width: 80% !important;
 }
+}
+
+#donotdisplay {
+  display: none;
 }
