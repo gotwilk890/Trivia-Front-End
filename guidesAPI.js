@@ -2,7 +2,7 @@
 var toggle = 'off';
 var guidesAPI = {
 
-  api_url: 'http://shielded-lowlands-2169.herokuapp.com',
+  api_url: 'https://shielded-lowlands-2169.herokuapp.com',
 
   ajax: function(config, cb){
     $.ajax(config).done(function(data, textStatus, jqhxr){
