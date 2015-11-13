@@ -1,4 +1,5 @@
 "use strict"
+var guide_id
 var toggle = 'off';
 var guidesAPI = {
 
@@ -92,8 +93,9 @@ $(document).ready(function(){
   });
 
   $(document).on('click','.edit', function(){
+    guide_id = $(this).data('id');
     console.log('clicked');
-    $(this).children().show();
+    $(this).parent().siblings().show();
 
   });
 
@@ -127,7 +129,7 @@ $(document).ready(function(){
   });
 
   $(document).on('submit', '.updateGuide', function(e){
-    var id = $('.guide_id').data('id');
+    var id = guide_id;
     var token = $('.token').val();
     var guide = wrap('guide', form2object(this));
     var cb = function cb(error, data) {
@@ -153,7 +155,7 @@ $(document).ready(function(){
   });
 
   $(document).on('click', '.remove', function(e){
-    var id = $('.guide_id').data('id');
+    var id = $(this).data('id');
     var token = $('.token').val();
     var cb = function cb(error, data) {
       if (error) {
