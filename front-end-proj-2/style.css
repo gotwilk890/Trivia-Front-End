@@ -192,6 +192,10 @@
   display: none;
 }
 
+.updateGuide{
+  display: none;
+}
+
 .transbox
 {
   background: rgba(33, 42, 63, 0.8);

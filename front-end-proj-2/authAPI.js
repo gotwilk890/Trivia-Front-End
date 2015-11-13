@@ -4,7 +4,7 @@ var data = {};
 
 var authAPI = {
 
-  api_url: 'http://localhost:3000',
+  api_url: 'http://shielded-lowlands-2169.herokuapp.com',
 
   ajax: function(config, cb){
     $.ajax(config).done(function(data, textStatus, jqhxr){

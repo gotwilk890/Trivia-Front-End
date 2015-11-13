@@ -2,7 +2,7 @@
 var toggle = 'off';
 var guidesAPI = {
 
-  api_url: 'http://localhost:3000',
+  api_url: 'http://shielded-lowlands-2169.herokuapp.com',
 
   ajax: function(config, cb){
     $.ajax(config).done(function(data, textStatus, jqhxr){
@@ -91,6 +91,12 @@ $(document).ready(function(){
       }
   });
 
+  $(document).on('click','.edit', function(){
+    console.log('clicked');
+    $(this).children().show();
+
+  });
+
 
   $('#createGuide').on('submit', function(e){
     var token = $('.token').val();
@@ -120,8 +126,8 @@ $(document).ready(function(){
     e.preventDefault();
   });
 
-  $('#updateGuide').on('submit', function(e){
-    var id = $('#guideID').val();
+  $(document).on('submit', '.updateGuide', function(e){
+    var id = $('.guide_id').data('id');
     var token = $('.token').val();
     var guide = wrap('guide', form2object(this));
     var cb = function cb(error, data) {
@@ -130,18 +136,46 @@ $(document).ready(function(){
         return;
       }
     callback(null, data);
+    $(".editguides").remove();
+    guidesAPI.showGuides(token, function(error, data){
+        data.guides = data.guides;
+        var display = function(){
+        var myHTML = guideTemplate({guides: data.guides});
+        $("#showguides").append(myHTML);
+        };
+    display();
+
+    });
+    e.preventDefault();
     };
     guidesAPI.edit(guide, id, token, cb);
     e.preventDefault();
   });
 
-  $('#delete').on('submit', function(e){
-    var id = $('#guideID').val();
+  $(document).on('click', '.remove', function(e){
+    var id = $('.guide_id').data('id');
     var token = $('.token').val();
-    guidesAPI.delete(id, token, callback);
+    var cb = function cb(error, data) {
+      if (error) {
+        callback(error);
+        return;
+      }
+    callback(null, data);
+    $(".editguides").remove();
+    guidesAPI.showGuides(token, function(error, data){
+        data.guides = data.guides;
+        var display = function(){
+        var myHTML = guideTemplate({guides: data.guides});
+        $("#showguides").append(myHTML);
+        };
+    display();
+
+    });
+    e.preventDefault();
+    };
+    guidesAPI.delete(id, token, cb);
     e.preventDefault();
   });
-
-
-
 });
+
+

@@ -154,8 +154,8 @@
 	<div class="container">
 		<div class="row" id="starts">
 			<div class="col-md-12 col-sm-12 col-xs-12 work-list">
-				<h2 class="text-center portfolio-text">Portfolio</h2>
-				<div class="col-md-4 col-sm-6 col-xs-12 work-space">
+				<h2 class="text-center portfolio-text">Quiz</h2>
+				<!-- <div class="col-md-4 col-sm-6 col-xs-12 work-space">
 					<a href="images/story1.png" data-lightbox="image-1">
                 		<div class="featured-img">
                 			<img src="images/story1.png"/>
@@ -220,7 +220,7 @@
 						 </div>
                 		<h3>heart Touching</h3>
                 	</a>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>
@@ -331,8 +331,13 @@
             <i class="glyphicon glyphicon-file"></i>
           </div>
         </div>
-        <div class="col-md-9 col-md-offset-1 col-sm-10 col-xs-12 icon-text-box">
-          <h4>{{name}}</h4>
+        <div class="col-md-9 col-md-offset-1 col-sm-10 col-xs-12 icon-text-box edit">
+          <h4>{{name}}<i class="glyphicon glyphicon-pencil edit"></i><i class="glyphicon glyphicon-remove remove"></i></h4>
+          <form class="updateGuide">
+            <input name="name" type="text" placeholder="Edit Guide Name">
+            <input name="edit_guide" type="submit" value="Edit Guide">
+            <input class="guide_id" name="id" type="hidden" data-id="{{id}}">
+          </form>
         </div>
       </div>
       {{/each}}
